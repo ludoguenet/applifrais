@@ -1,0 +1,17 @@
+{
+    "name": "gsb/ludovicguenet",
+    "description": "Application PHP GSB Applifrais.",
+    "authors": [
+        {
+            "name": "ludoguenet",
+            "email": "ludovicguenet@gmx.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\": "database/"
+        }
+    },
+    "require": {}
+}
