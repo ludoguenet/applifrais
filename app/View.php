@@ -19,4 +19,14 @@ class View
 
         return ob_get_clean();
     }
+
+    public static function make(string $path): static
+    {
+        return new static($path);
+    }
+
+    public function __toString(): string
+    {
+        return $this->render();
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Exception;
+
 class Router
 {
     private array $routes = [];
@@ -37,5 +39,7 @@ class Router
                 return call_user_func_array([$class, $method], []);
             }
         }
+
+        throw new Exception('Route Not Found');
     }
 }
