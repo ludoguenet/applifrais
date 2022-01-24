@@ -15,9 +15,19 @@ class Router
      * @param callable $action
      * @return void
      */
-    public function register(string $route, array $action): void
+    public function register(string $route, array $action, string $verb): void
     {
-        $this->routes[$route] = $action;
+        $this->routes[$verb][$route] = $action;
+    }
+
+    public function get(string $route, array $action): void
+    {
+        $this->register($route, $action, 'GET');
+    }
+
+    public function post(string $route, array $action): void
+    {
+        $this->register($route, $action, 'POST');
     }
 
     /**
@@ -26,11 +36,11 @@ class Router
      * @param string $requestUri
      * @return ?
      */
-    public function resolve(string $requestUri)
+    public function resolve(string $requestUri, string $requestMethod)
     {
         $route = explode('?', $requestUri)[0];
 
-        $action = $this->routes[$route] ?? null;
+        $action = $this->routes[$requestMethod][$route] ?? null;
         [$class, $method] = $action;
 
         if (is_array($action)) {

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require '../vendor/autoload.php';
 
@@ -18,8 +19,4 @@ $router = new Router();
 // Fichier de définition des routes
 require ROUTES_PATH . 'web.php';
 
-// echo '<pre>';
-// var_dump($router); die();
-// echo '</pre>';
-
-echo $router->resolve($_SERVER['REQUEST_URI']);
+echo $router->resolve($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

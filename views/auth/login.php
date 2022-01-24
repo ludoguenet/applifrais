@@ -1,6 +1,7 @@
+<?php include_once(PATH_VIEW . '/includes/header.php'); ?>
 <h1>Se connecter</h1>
 
-<form id="frmConnexion" action="" method="post">
+<form id="frmConnexion" action="/login" method="post">
       <div class="corpsForm">
         <input type="hidden" name="etape" id="etape" value="validerConnexion" />
       <p>
@@ -19,3 +20,4 @@
         </p> 
       </div>
 </form>
+<?php include_once(PATH_VIEW . '/includes/footer.php'); ?>

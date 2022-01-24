@@ -7,9 +7,17 @@
 /**
  * Homepage
  */
-$router->register('/', [App\Controllers\HomeController::class, 'index']);
+$router->get('/', [App\Controllers\HomeController::class, 'index']);
 
 /**
  * Authentication
  */
-$router->register('/login', [App\Controllers\Auth\AuthController::class, 'login']);
+$router->get('/login', [App\Controllers\Auth\AuthController::class, 'login']);
+$router->post('/login', [App\Controllers\Auth\AuthController::class, 'authenticate']);
+
+/**
+ * Fiches de frais
+ */
+$router->get('/fiches-de-frais', [App\Controllers\FeesCardController::class, 'index']);
+$router->post('/fiches-de-frais', [App\Controllers\FeesCardController::class, 'store']);
+$router->post('/fiches-de-frais/create', [App\Controllers\FeesCardController::class, 'create']);
