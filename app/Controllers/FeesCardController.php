@@ -3,20 +3,19 @@
 namespace App\Controllers;
 
 use App\View;
-use Helpers\Auth\Auth;
+use Helpers\Auth;
+use Helpers\FeesCard;
+use Models\FeesLineCard;
 
 class FeesCardController extends Controller
 {
     /**
      * Afficher les fiches de frais
      *
-     * @return void
      */
-    public function index()
+    public function index(): View
     {
         if (!Auth::check()) $this->redirect('login');
-
-        // Récupèrer les fiches frais de l'utilisateur connecté;
 
         return View::make('fees_cards/index');
     }
@@ -28,16 +27,34 @@ class FeesCardController extends Controller
      */
     public function create()
     {
+        // Vérifier si une fiche de frais existe sinon lui créer.
+        $currentMonthFeesCard = FeesCard::currentMonth();
 
+        if (!$currentMonthFeesCard) {
+            $currentMonthFeesCard = FeesCard::createDefault();
+        }
+
+        $feesLineCards = (new FeesLineCard())->where(['idVisiteur', 'mois'], [$currentMonthFeesCard['idVisiteur'], $currentMonthFeesCard['mois']], true);
+        
+        return View::make('fees_cards/create', compact('currentMonthFeesCard', 'feesLineCards'));
     }
 
     /**
-     * Enreigstre une nouvelle fiche de frais
+     * MAJ
      *
      * @return void
      */
-    public function store()
+    public function update()
     {
+        $feesLineModel = new FeesLineCard();
 
+        $yearAndMonth = date('Y') . date('m');
+        $userId = Auth::id();
+
+        foreach ($_POST as $idFraisForfait => $quantity) {
+            $feesLineModel->updateQuantity($userId, $yearAndMonth, $idFraisForfait, $quantity);
+        }
+
+        return $this->redirect('/fiches-de-frais/create');
     }
 }

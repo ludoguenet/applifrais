@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use App\Controllers\Controller;
 use App\View;
 use Models\User;
-use Helpers\Auth\Auth;
+use Helpers\Auth;
 
 class AuthController extends Controller
 {
@@ -35,6 +35,15 @@ class AuthController extends Controller
     
         Auth::log([$visiteur['id'], $visiteur['login']]);
 
-        return $this->redirect('fiches-de-frais');
+        return $this->redirect('/fiches-de-frais');
+    }
+
+    public function logout()
+    {
+        if (Auth::check()) {
+            unset($_SESSION['auth']);
+        }
+
+        return $this->redirect('/');
     }
 }

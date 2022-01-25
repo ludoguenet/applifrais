@@ -11,9 +11,8 @@ abstract class Model
      *
      * @param string|array $column
      * @param string $value
-     * @return void
      */
-    public function where(string|array $columns, string|array $value)
+    public function where(string|array $columns, string|array $value, $all = false)
     {
         $statement = $this->getDB()->prepare("SELECT * FROM {$this->table}");
 
@@ -35,6 +34,10 @@ abstract class Model
             $statement->execute([$value]);
         } else {
             $statement->execute($value);
+        }
+
+        if ($all) {
+            return $statement->fetchAll();
         }
 
         return $statement->fetch();

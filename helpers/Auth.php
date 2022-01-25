@@ -1,6 +1,6 @@
 <?php
 
-namespace Helpers\Auth;
+namespace Helpers;
 
 class Auth
 {
@@ -25,5 +25,17 @@ class Auth
     public static function check(): bool
     {
         return isset($_SESSION['auth']);
+    }
+
+    /**
+     * Récupère l'ID de l'utilisateur authentifié.
+     *
+     * @return string
+     */
+    public static function id(): string
+    {
+        if (self::check()) {
+            return $_SESSION['auth'][0];
+        }
     }
 }

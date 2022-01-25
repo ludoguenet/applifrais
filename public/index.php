@@ -3,8 +3,6 @@ session_start();
 
 require '../vendor/autoload.php';
 
-use App\Router;
-
 /**
  * Définition des constantes globales.
  */
@@ -14,7 +12,7 @@ define('ROUTES_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'routes' . DIRECT
 /**
  * Instanciation du Routeur.
  */
-$router = new Router();
+$router = new App\Router();
 
 // Fichier de définition des routes
 require ROUTES_PATH . 'web.php';
