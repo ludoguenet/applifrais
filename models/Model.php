@@ -6,6 +6,43 @@ use Database\PDOConnector;
 
 abstract class Model
 {
+    public function add(array $params)
+    {
+        $firstParenthesis = '';
+        $counter = 0;
+
+        foreach ($params as $key => $param) {
+            if ($counter === 0) {
+                $firstParenthesis .= "INSERT INTO {$this->table}(" . $key;
+            } elseif ($counter === count($params) - 1) {
+                $firstParenthesis .= ', ' . $key . ')';
+            } else {
+                $firstParenthesis .= ', ' . $key . '';
+            }
+
+            $counter++;
+        }
+
+        $secondParenthesis = '';
+        $counter = 0;
+
+        foreach ($params as $key => $param) {
+            if ($counter === 0) {
+                $secondParenthesis .= "VALUES(:" . $key;
+            } elseif ($counter === count($params) - 1) {
+                $secondParenthesis .= ', :' . $key . ')';
+            } else {
+                $secondParenthesis .= ', :' . $key . '';
+            }
+
+            $counter++;
+        }
+        
+        $statement = $this->getDB()->prepare($firstParenthesis . ' ' . $secondParenthesis);
+
+        $statement->execute($params);
+    }
+
     /**
      * Récupère des données sur une clause WHERE en passant plusieurs valeurs.
      *

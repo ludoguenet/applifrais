@@ -19,7 +19,13 @@ class NoFeesCardController extends Controller
         $yearAndMonth = date('Y') . date('m');
         $userId = Auth::id();
 
-        $noFeesLineModel->addNew($yearAndMonth, $userId, $_POST['libelle'], $_POST['date'], $_POST['montant']);
+        $noFeesLineModel->add([
+            'idVisiteur' => $userId,
+            'mois' => $yearAndMonth,
+            'libelle' => $_POST['libelle'],
+            'date' => $_POST['date'],
+            'montant' => $_POST['montant']
+        ]);
 
         return $this->redirect('/fiches-de-frais/create');
     }

@@ -1,14 +1,18 @@
 <?php include_once(PATH_VIEW . '/includes/header.php'); ?>
     <h1>Créer une fiche de frais (forfait)</h1>
     <?php if ($currentMonthFeesCard): ?>
-        <form action="./update" method="post">
+        <form action="./update" method="post" enctype="multipart/form-data">
             <div class="form-row">
                 <?php foreach($feesLineCards as $feesLineCard): ?>
                     <label for=""><?= $feesLineCard['idFraisForfait'] ?></label>
                     <input type="number" class="form-control" name="<?= $feesLineCard['idFraisForfait'] ?>" value="<?= $feesLineCard['quantite'] ?>">
                 <?php endforeach ?>
-                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Example file input</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     <?php endif ?>
     <?php if (count($noFeesLineCards) > 0): ?>
