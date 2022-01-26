@@ -43,6 +43,17 @@ abstract class Model
         return $statement->fetch();
     }
 
+    public function delete(int $id): void
+    {
+        $query = "DELETE FROM {$this->table} WHERE id = :id";
+
+        $statement = $this->getDB()->prepare($query);
+
+        $statement->execute([
+            'id' => $id
+        ]);
+    }
+
     protected function getDB(): PDOConnector
     {
         return PDOConnector::getInstance();

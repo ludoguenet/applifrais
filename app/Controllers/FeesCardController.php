@@ -6,6 +6,7 @@ use App\View;
 use Helpers\Auth;
 use Helpers\FeesCard;
 use Models\FeesLineCard;
+use Models\NoFeesLineCard;
 
 class FeesCardController extends Controller
 {
@@ -34,9 +35,19 @@ class FeesCardController extends Controller
             $currentMonthFeesCard = FeesCard::createDefault();
         }
 
-        $feesLineCards = (new FeesLineCard())->where(['idVisiteur', 'mois'], [$currentMonthFeesCard['idVisiteur'], $currentMonthFeesCard['mois']], true);
+        $feesLineCards = (new FeesLineCard())->where(
+            ['idVisiteur', 'mois'],
+            [ $currentMonthFeesCard['idVisiteur'], $currentMonthFeesCard['mois'] ],
+            true
+        );
+
+        $noFeesLineCards = (new NoFeesLineCard())->where(
+            ['idVisiteur', 'mois'],
+            [ $currentMonthFeesCard['idVisiteur'], $currentMonthFeesCard['mois'] ],
+            true
+        );
         
-        return View::make('fees_cards/create', compact('currentMonthFeesCard', 'feesLineCards'));
+        return View::make('fees_cards/create', compact('currentMonthFeesCard', 'feesLineCards', 'noFeesLineCards'));
     }
 
     /**

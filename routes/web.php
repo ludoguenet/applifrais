@@ -22,3 +22,9 @@ $router->post('/login', [App\Controllers\Auth\AuthController::class, 'authentica
 $router->get('/fiches-de-frais', [App\Controllers\FeesCardController::class, 'index']);
 $router->post('/fiches-de-frais/update', [App\Controllers\FeesCardController::class, 'update']);
 $router->get('/fiches-de-frais/create', [App\Controllers\FeesCardController::class, 'create']);
+
+/**
+ * Lignes hors forfaits
+ */
+$router->post('/hors-forfait/store', [App\Controllers\NoFeesCardController::class, 'store']);
+$router->get('/hors-forfait/delete', [App\Controllers\NoFeesCardController::class, 'delete']);

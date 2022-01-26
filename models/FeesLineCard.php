@@ -6,10 +6,7 @@ class FeesLineCard extends Model
 {
     protected string $table = 'lignefraisforfait';
 
-    // $userId, $yearAndMonth, $feesLineCard['idFraisForfait'], $_POST[ $feesLineCard['idFraisForfait'] ]
     public function updateQuantity($userID, $yearAndMonth, $idFraisForfait, $quantity) {
-        // $this->where(['idVisiteur', 'mois', 'idFraisForfait'], [$userID, $yearAndMonth, $idFraisForfait]);
-        
         $query = $this->getDB()->prepare("
             UPDATE {$this->table} SET quantite = :quantity
             WHERE idVisiteur = :userID
