@@ -22,17 +22,21 @@ class FeesCardController extends Controller
     }
 
     /**
-     * Ajouter une fiche de frais
+     * Formulaire pour modifier / ajouter des frais sur sa fiche.
+     * Création automatique d'une fiche de frais elle n'existe pas.
      *
-     * @return void
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         // Vérifier si une fiche de frais existe sinon lui créer.
         $currentMonthFeesCard = FeesCard::currentMonth();
 
         if (!$currentMonthFeesCard) {
-            $currentMonthFeesCard = FeesCard::createDefault();
+            $userID = Auth::id();
+            $yearAndMonth = date('Y') . date('m');
+
+            $currentMonthFeesCard = FeesCard::createDefault($userID, $yearAndMonth);
         }
 
         $feesLineCards = (new FeesLineCard())->where(
@@ -51,11 +55,11 @@ class FeesCardController extends Controller
     }
 
     /**
-     * MAJ
+     * Met à jour les frais avec les informations envoyées puis redirige sur la même page.
      *
      * @return void
      */
-    public function update()
+    public function update(): void
     {
         $feesLineModel = new FeesLineCard();
 
@@ -66,6 +70,6 @@ class FeesCardController extends Controller
             $feesLineModel->updateQuantity($userId, $yearAndMonth, $idFraisForfait, $quantity);
         }
 
-        return $this->redirect('/fiches-de-frais/create');
+        $this->redirect('/fiches-de-frais/create');
     }
 }

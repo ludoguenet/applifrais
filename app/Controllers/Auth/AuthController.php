@@ -20,30 +20,37 @@ class AuthController extends Controller
     }
 
     /**
-     * Authentifie l'utilisateur connecté sinon renvoie false.
+     * Tente d'authentifier l'utilisateur.
      *
-     * @return mixed
+     * @return void
      */
-    public function authenticate(): mixed
+    public function authenticate(): void
     {
-        $textLogin = $_POST['txtLogin'];
-        $textMdp = $_POST['txtMdp'];
+        $textLogin = $_POST['login'];
+        $textMdp = $_POST['password'];
 
         $visiteur = (new User())->where(['login', 'mdp'], [$textLogin, $textMdp]);
 
-        if (!$visiteur) return $this->redirect('login');
+        if (!$visiteur) {
+            $this->redirect('login');
+        } else {
+            Auth::log([$visiteur['id'], $visiteur['login']]);
+            $this->redirect('/fiches-de-frais');
+        }
     
-        Auth::log([$visiteur['id'], $visiteur['login']]);
-
-        return $this->redirect('/fiches-de-frais');
     }
 
-    public function logout()
+    /**
+     * Déconnecte l'utilisateur authentifié.
+     *
+     * @return void
+     */
+    public function logout(): void
     {
         if (Auth::check()) {
             unset($_SESSION['auth']);
         }
 
-        return $this->redirect('/');
+        $this->redirect('/');
     }
 }

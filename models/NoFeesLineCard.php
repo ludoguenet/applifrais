@@ -5,16 +5,20 @@ namespace Models;
 class NofeesLineCard extends Model
 {
     protected string $table = 'lignefraishorsforfait';
-
-    // $noFeesLineModel->addNew($yearAndMonth, $userId, $_POST['libelle'], $_POST['date'], $_POST['montant']);
     
+    /**
+     * Ajoute une nouvelle ligne de frais hors forfait.
+     *
+     * @param [type] $yearAndMonth
+     * @param [type] $userId
+     * @param [type] $label
+     * @param [type] $date
+     * @param [type] $amount
+     * @return void
+     */
     public function addNew($yearAndMonth, $userId, $label, $date, $amount): void
     {
-        $query = "INSERT INTO {$this->table}(idVisiteur, mois, libelle, date, montant) VALUES(:idVisiteur, :mois, :libelle, :date, :montant)";
-
-        $statement = $this->getDB()->prepare($query);
-
-        $statement->execute([
+        $this->add([
             'idVisiteur' => $userId,
             'mois' => $yearAndMonth,
             'libelle' => $label,

@@ -6,7 +6,13 @@ use Database\PDOConnector;
 
 abstract class Model
 {
-    public function add(array $params)
+    /**
+     * Ajoute un enregistrement dans la table du modèle.
+     *
+     * @param array $params
+     * @return void
+     */
+    public function add(array $params): void
     {
         $firstParenthesis = '';
         $counter = 0;
@@ -47,9 +53,9 @@ abstract class Model
      * Récupère des données sur une clause WHERE en passant plusieurs valeurs.
      *
      * @param string|array $column
-     * @param string $value
+     * @param mixed
      */
-    public function where(string|array $columns, string|array $value, $all = false)
+    public function where(string|array $columns, string|array $value, $all = false): mixed
     {
         $statement = $this->getDB()->prepare("SELECT * FROM {$this->table}");
 
@@ -80,6 +86,12 @@ abstract class Model
         return $statement->fetch();
     }
 
+    /**
+     * Supprime un enregistrement dans la tabel du modèle.
+     *
+     * @param integer $id
+     * @return void
+     */
     public function delete(int $id): void
     {
         $query = "DELETE FROM {$this->table} WHERE id = :id";
@@ -91,6 +103,11 @@ abstract class Model
         ]);
     }
 
+    /**
+     * Singleton pour renvoyer une connexion à la Base de Données via PDO.
+     *
+     * @return PDOConnector
+     */
     protected function getDB(): PDOConnector
     {
         return PDOConnector::getInstance();

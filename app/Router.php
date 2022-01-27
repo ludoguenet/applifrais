@@ -20,11 +20,25 @@ class Router
         $this->routes[$verb][$route] = $action;
     }
 
+    /**
+     * Enregistre une route pour la verbe GET.
+     *
+     * @param string $route
+     * @param array $action
+     * @return void
+     */
     public function get(string $route, array $action): void
     {
         $this->register($route, $action, 'GET');
     }
 
+    /**
+     * Enregistre une route pour la verbe POST.
+     *
+     * @param string $route
+     * @param array $action
+     * @return void
+     */
     public function post(string $route, array $action): void
     {
         $this->register($route, $action, 'POST');

@@ -6,15 +6,17 @@ class FeesCard extends Model
 {
     protected string $table = 'fichefrais';
 
-    public function addDefault($userId, $yearAndMonth)
+    /**
+     * Créer une fiche de frais par défaut avec ses lignes de frais forfaitisés.
+     *
+     * @param string $userId
+     * @param string $yearAndMonth
+     * @return array
+     */
+    public function addDefault(string $userId, string $yearAndMonth): array
     {
         // Création d'une fiche frais par défaut.
-        $query = "INSERT INTO {$this->table}(idVisiteur, mois, nbJustificatifs, montantValide, dateModif, idEtat)
-        VALUES(:idVisiteur, :mois, :nbJustificatifs, :montantValide, :dateModif, :idEtat)";
-
-        $statement = $this->getDB()->prepare($query);
-        
-        $statement->execute([
+        $this->add([
             'idVisiteur' => $userId,
             'mois' => $yearAndMonth,
             'nbJustificatifs' => 0,
@@ -27,18 +29,16 @@ class FeesCard extends Model
         $idFraisForfaits = ['ETP', 'KM', 'NUI', 'REP'];
 
         foreach ($idFraisForfaits as $idFraisForfait) {
-            $query = "INSERT INTO lignefraisforfait(idVisiteur, mois, idFraisForfait, quantite)
-            VALUES(:idVisiteur, :mois, :idFraisForfait, :quantite)";
-    
-            $statement = $this->getDB()->prepare($query);
-            
-            $statement->execute([
+            $feesLineModel = new FeesLineCard();
+            $feesLineModel->add([
                 'idVisiteur' => $userId,
                 'mois' => $yearAndMonth,
                 'idFraisForfait' => $idFraisForfait,
                 'quantite' => 0
             ]);
+
         }
 
+        return $this->where(['idVisiteur', 'mois'], [$userId, $yearAndMonth]);
     }
 }

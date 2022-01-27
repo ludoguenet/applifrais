@@ -8,11 +8,11 @@ use Models\NoFeesLineCard;
 class NoFeesCardController extends Controller
 {
     /**
-     * Ajoute une ligne hors forfait
+     * Ajoute une ligne hors forfait et redirige vers la page de création d'une fiche.
      *
      * @return void
      */
-    public function store()
+    public function store(): void
     {
         $noFeesLineModel = new NoFeesLineCard();
 
@@ -27,14 +27,19 @@ class NoFeesCardController extends Controller
             'montant' => $_POST['montant']
         ]);
 
-        return $this->redirect('/fiches-de-frais/create');
+        $this->redirect('/fiches-de-frais/create');
     }
 
-    public function delete()
+    /**
+     * Supprime une ligne hors forfait et redirige vers la page de création d'une fiche.
+     *
+     * @return void
+     */
+    public function delete(): void
     {
         $noFeesLineModel = new NoFeesLineCard();
         $noFeesLineModel->delete($_GET['id']);
 
-        return $this->redirect('/fiches-de-frais/create');
+        $this->redirect('/fiches-de-frais/create');
     }
 }

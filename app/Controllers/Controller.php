@@ -4,7 +4,13 @@ namespace App\Controllers;
 
 abstract class Controller
 {
-    protected function redirect($path)
+    /**
+     * Redirection vers un chemin.
+     *
+     * @param [type] $path
+     * @return void
+     */
+    protected function redirect($path): void
     {
         header('Location: ' . $path);
     }
