@@ -8,6 +8,6 @@
 - [x] Organisation MVC des dossiers
 - [x] Développement des Contrôleurs
 - [x] Système d'authentification
+- [x] Refonte complète de la logique des frais
 - [ ] Validation des données
-- [ ] Refonte complète de la logique des frais
 - [ ] Soumettre des justificatifs
