@@ -1,5 +1,6 @@
 <?php include_once(PATH_VIEW . '/includes/header.php'); ?>
     <h1>Créer une fiche de frais (forfait)</h1>
+
     <?php if ($currentMonthFeesCard): ?>
         <form action="./update" method="post" enctype="multipart/form-data">
 
@@ -10,15 +11,15 @@
                     </div>
                 <?php endforeach ?>
 
-                
             <div class="form-group mb-3">
-                <label for="exampleFormControlFile1">Example file input</label>
+                <label for="exampleFormControlFile1">Envoyer un justificatif</label>
                 <input type="file" class="form-control-file" id="exampleFormControlFile1">
             </div>
 
             <button type="submit" class="btn btn-primary">Enregistrer</button>
         </form>
     <?php endif ?>
+
     <?php if (count($noFeesLineCards) > 0): ?>
         <table class="table table-striped">
             <thead>
@@ -49,6 +50,7 @@
             </tbody>
         </table>
     <?php endif ?>
+    
     <div class="mt-5">
         <h1>Créer une fiche de frais (hors-forfait)</h1>
         <form action="/hors-forfait/store" method="post">

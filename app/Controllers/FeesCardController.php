@@ -7,6 +7,7 @@ use Helpers\Auth;
 use Helpers\FeesCard;
 use Models\FeesLineCard;
 use Models\NoFeesLineCard;
+use Models\FeesCard as ModelFeesCard;
 
 class FeesCardController extends Controller
 {
@@ -18,7 +19,11 @@ class FeesCardController extends Controller
     {
         if (!Auth::check()) $this->redirect('login');
 
-        return View::make('fees_cards/index');
+        // Récupère les éventuelles fiches crées.
+        $userID = Auth::id();
+        $feesCards = (new ModelFeesCard())->where('idVisiteur', $userID, true);
+
+        return View::make('fees_cards/index', compact('feesCards'));
     }
 
     /**
