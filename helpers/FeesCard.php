@@ -14,9 +14,9 @@ class FeesCard
     public static function currentMonth(): mixed
     {
         $yearAndMonth = date('Y') . date('m');
-        $userId = Auth::id();
+        $userID = Auth::id();
 
-        return (new ModelsFeesCard())->where(['idVisiteur', 'mois'], [$userId, $yearAndMonth]);
+        return (new ModelsFeesCard())->where(['idVisiteur', 'mois'], [$userID, $yearAndMonth]);
     }
 
     /**

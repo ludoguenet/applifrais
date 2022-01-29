@@ -17,10 +17,10 @@ class NoFeesCardController extends Controller
         $noFeesLineModel = new NoFeesLineCard();
 
         $yearAndMonth = date('Y') . date('m');
-        $userId = Auth::id();
+        $userID = Auth::id();
 
         $noFeesLineModel->add([
-            'idVisiteur' => $userId,
+            'idVisiteur' => $userID,
             'mois' => $yearAndMonth,
             'libelle' => $_POST['libelle'],
             'date' => $_POST['date'],

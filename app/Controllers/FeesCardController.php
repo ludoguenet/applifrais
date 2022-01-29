@@ -69,12 +69,24 @@ class FeesCardController extends Controller
         $feesLineModel = new FeesLineCard();
 
         $yearAndMonth = date('Y') . date('m');
-        $userId = Auth::id();
+        $userID = Auth::id();
 
         foreach ($_POST as $idFraisForfait => $quantity) {
-            $feesLineModel->updateQuantity($userId, $yearAndMonth, $idFraisForfait, $quantity);
+            $feesLineModel->updateQuantity($userID, $yearAndMonth, $idFraisForfait, $quantity);
         }
 
         $this->redirect('/fiches-de-frais/create');
+    }
+
+    public function show(): void
+    {
+        $userID = Auth::id();
+        $feesCard = (new ModelFeesCard())->where(['idVisiteur', 'mois'], [ $userID, $_POST['selected_month']]);
+        $feesLineCard = (new FeesLineCard())->where(['idVisiteur', 'mois'], [ $userID, $_POST['selected_month']], true);
+        $noFeesLineCards = (new NoFeesLineCard())->where(['idVisiteur', 'mois'], [ $userID, $_POST['selected_month']], true);
+
+        dd($feesCard, $feesLineCard, $noFeesLineCards);
+
+        $this->redirect('/fiches-de-frais', compact('feesCard', 'feesLineCard', 'noFeesLineCards'));
     }
 }

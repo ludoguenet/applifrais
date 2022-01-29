@@ -9,15 +9,15 @@ class FeesCard extends Model
     /**
      * Créer une fiche de frais par défaut avec ses lignes de frais forfaitisés.
      *
-     * @param string $userId
+     * @param string $userID
      * @param string $yearAndMonth
      * @return array
      */
-    public function addDefault(string $userId, string $yearAndMonth): array
+    public function addDefault(string $userID, string $yearAndMonth): array
     {
         // Création d'une fiche frais par défaut.
         $this->add([
-            'idVisiteur' => $userId,
+            'idVisiteur' => $userID,
             'mois' => $yearAndMonth,
             'nbJustificatifs' => 0,
             'montantValide' => null,
@@ -31,7 +31,7 @@ class FeesCard extends Model
         foreach ($idFraisForfaits as $idFraisForfait) {
             $feesLineModel = new FeesLineCard();
             $feesLineModel->add([
-                'idVisiteur' => $userId,
+                'idVisiteur' => $userID,
                 'mois' => $yearAndMonth,
                 'idFraisForfait' => $idFraisForfait,
                 'quantite' => 0
@@ -39,6 +39,6 @@ class FeesCard extends Model
 
         }
 
-        return $this->where(['idVisiteur', 'mois'], [$userId, $yearAndMonth]);
+        return $this->where(['idVisiteur', 'mois'], [$userID, $yearAndMonth]);
     }
 }

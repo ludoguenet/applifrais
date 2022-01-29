@@ -20,6 +20,7 @@ $router->post('/login', [App\Controllers\Auth\AuthController::class, 'authentica
  * Fiches de frais
  */
 $router->get('/fiches-de-frais', [App\Controllers\FeesCardController::class, 'index']);
+$router->post('/fiches-de-frais', [App\Controllers\FeesCardController::class, 'show']);
 $router->post('/fiches-de-frais/update', [App\Controllers\FeesCardController::class, 'update']);
 $router->get('/fiches-de-frais/create', [App\Controllers\FeesCardController::class, 'create']);
 
