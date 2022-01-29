@@ -23,7 +23,7 @@ class FeesCardController extends Controller
         $userID = Auth::id();
         $feesCards = (new ModelFeesCard())->where('idVisiteur', $userID, true);
 
-        return View::make('fees_cards/index', compact('feesCards'));
+        return View::make('fees/index', compact('feesCards'));
     }
 
     /**
@@ -56,7 +56,7 @@ class FeesCardController extends Controller
             true
         );
         
-        return View::make('fees_cards/create', compact('currentMonthFeesCard', 'feesLineCards', 'noFeesLineCards'));
+        return View::make('fees/create', compact('currentMonthFeesCard', 'feesLineCards', 'noFeesLineCards'));
     }
 
     /**
@@ -78,15 +78,19 @@ class FeesCardController extends Controller
         $this->redirect('/fiches-de-frais/create');
     }
 
-    public function show(): void
+    /**
+     * Montre les informations de frais pour le mois choisi par l'utilisateur authentifié.
+     *
+     * @return View
+     */
+    public function show(): View
     {
         $userID = Auth::id();
+        $feesCards = (new ModelFeesCard())->where('idVisiteur', $userID, true);
         $feesCard = (new ModelFeesCard())->where(['idVisiteur', 'mois'], [ $userID, $_POST['selected_month']]);
-        $feesLineCard = (new FeesLineCard())->where(['idVisiteur', 'mois'], [ $userID, $_POST['selected_month']], true);
+        $feesLineCards = (new FeesLineCard())->withCalculate($userID, $_POST['selected_month']);
         $noFeesLineCards = (new NoFeesLineCard())->where(['idVisiteur', 'mois'], [ $userID, $_POST['selected_month']], true);
 
-        dd($feesCard, $feesLineCard, $noFeesLineCards);
-
-        $this->redirect('/fiches-de-frais', compact('feesCard', 'feesLineCard', 'noFeesLineCards'));
+        return View::make('fees/index', compact('feesCards', 'feesCard', 'feesLineCards', 'noFeesLineCards'));
     }
 }
