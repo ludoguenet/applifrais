@@ -21,7 +21,7 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/">🏠 Accueil</a>
         </li>
-        <?php if (Helpers\Auth::check()): ?>
+        <?php if (App\Helpers\Auth::check()): ?>
           <li class="nav-item">
             <a class="nav-link" href="/fiches-de-frais">📂 Consulter fiches de frais</a>
           </li>

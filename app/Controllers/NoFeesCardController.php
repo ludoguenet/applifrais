@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use Helpers\Auth;
+use App\Helpers\Auth;
 use Models\NoFeesLineCard;
 
 class NoFeesCardController extends Controller

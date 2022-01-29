@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\View;
-use Helpers\Auth;
-use Helpers\FeesCard;
+use App\Helpers\Auth;
+use App\Helpers\FeesCard;
 use Models\FeesLineCard;
 use Models\NoFeesLineCard;
 use Models\FeesCard as ModelFeesCard;

@@ -6,7 +6,7 @@
             <select class="form-select" name="selected_month" aria-label="Default select example">
             <option selected>Choisissez le mois</option>
             <?php foreach($feesCards as $feesCard): ?>
-                <option value="<?= $feesCard['mois'] ?>"><?= Helpers\DateHelper::formatMonth($feesCard['mois']) ?></option>
+                <option value="<?= $feesCard['mois'] ?>"><?= App\Helpers\DateHelper::formatMonth($feesCard['mois']) ?></option>
             <?php endforeach ?>
             </select>
         </div>
