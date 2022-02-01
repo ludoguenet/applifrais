@@ -21,11 +21,10 @@ class NoFeesCardController extends Controller
 
         // Enregistrement justificatif si présent
         if (isset($_FILES['justificatif'])) {
-            $baseName = $_FILES['justificatif']['name'];
+            $baseName = uniqid();
             $temporaryPathName = $_FILES['justificatif']['tmp_name'];
             $storageDirectory =
-            DIRECTORY_SEPARATOR
-            . 'storage'
+            '/storage'
             . DIRECTORY_SEPARATOR
             . 'justificatifs'
             . DIRECTORY_SEPARATOR;
