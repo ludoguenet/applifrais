@@ -20,7 +20,7 @@ class NoFeesCardController extends Controller
         $userID = Auth::id();
 
         // Enregistrement justificatif si présent
-        if (isset($_FILES['justificatif'])) {
+        if (isset($_FILES['justificatif']['tmp_name']) && !empty($_FILES['justificatif']['tmp_name'])) {
             $target_dir = WEBROOT . "/storage/justificatifs/";
             $fileName = basename($_FILES["justificatif"]["name"]);
             $target_file = $target_dir . $fileName;
