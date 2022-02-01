@@ -41,9 +41,9 @@
                         <td>
                             <?php if ($noFeesLineCard['chemin_justificatif']): ?>
                                 <a
-                                href="<?= $noFeesLineCard['chemin_justificatif'] ?>"
+                                href="/readpdf?file=<?= $noFeesLineCard['chemin_justificatif'] ?>"
                                 class="btn btn-secondary"
-                                download>
+                                >
                                 Télécharger le justificatif</a>
                             <?php endif ?>
                         </td>

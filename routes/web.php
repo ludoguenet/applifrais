@@ -29,3 +29,4 @@ $router->get('/fiches-de-frais/create', [App\Controllers\FeesCardController::cla
  */
 $router->post('/hors-forfait/store', [App\Controllers\NoFeesCardController::class, 'store']);
 $router->get('/hors-forfait/delete', [App\Controllers\NoFeesCardController::class, 'delete']);
+$router->get('/readpdf', [App\PDFDownloader::class, 'read']);
