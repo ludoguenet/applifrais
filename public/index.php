@@ -8,6 +8,7 @@ require '../vendor/autoload.php';
  */
 define('PATH_VIEW', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
 define('ROUTES_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'routes' . DIRECTORY_SEPARATOR);
+define('WEBROOT', dirname(__DIR__));
 
 /**
  * Instanciation du Routeur.

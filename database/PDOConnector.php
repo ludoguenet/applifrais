@@ -5,7 +5,7 @@ namespace Database;
 class PDOConnector extends \PDO
 {
     private const HOSTNAME = "localhost";
-    private const DBNAME = "gsb";
+    private const DBNAME = "applifrais";
     private const LOGIN = "root";
     private const PASSWORD = "";
 

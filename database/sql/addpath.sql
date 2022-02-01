@@ -1,2 +1,2 @@
-ALTER TABLE fichefrais
-ADD chemin_justificatif varchar(255) NULL
+ALTER TABLE lignefraishorsforfait
+ADD chemin_justificatif VARCHAR(255) NULL

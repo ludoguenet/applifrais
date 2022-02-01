@@ -19,12 +19,29 @@ class NoFeesCardController extends Controller
         $yearAndMonth = date('Y') . date('m');
         $userID = Auth::id();
 
+        // Enregistrement justificatif si présent
+        if (isset($_FILES['justificatif'])) {
+            $baseName = $_FILES['justificatif']['name'];
+            $temporaryPathName = $_FILES['justificatif']['tmp_name'];
+            $storageDirectory =
+            DIRECTORY_SEPARATOR
+            . 'storage'
+            . DIRECTORY_SEPARATOR
+            . 'justificatifs'
+            . DIRECTORY_SEPARATOR;
+            
+            $fullPathName = $storageDirectory . $baseName;
+
+            move_uploaded_file($temporaryPathName, $fullPathName);
+        }
+
         $noFeesLineModel->add([
             'idVisiteur' => $userID,
             'mois' => $yearAndMonth,
             'libelle' => $_POST['libelle'],
             'date' => $_POST['date'],
-            'montant' => $_POST['montant']
+            'montant' => $_POST['montant'],
+            'chemin_justificatif' => $fullPathName ?? NULL
         ]);
 
         $this->redirect('/fiches-de-frais/create');
