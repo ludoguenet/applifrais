@@ -21,17 +21,12 @@ class NoFeesCardController extends Controller
 
         // Enregistrement justificatif si présent
         if (isset($_FILES['justificatif'])) {
-            $baseName = uniqid();
-            $temporaryPathName = $_FILES['justificatif']['tmp_name'];
-            $storageDirectory =
-            '/storage'
-            . DIRECTORY_SEPARATOR
-            . 'justificatifs'
-            . DIRECTORY_SEPARATOR;
-            
-            $fullPathName = $storageDirectory . $baseName;
-
-            move_uploaded_file($temporaryPathName, $fullPathName);
+            $target_dir = WEBROOT . "/storage/justificatifs/";
+            $fileName = basename($_FILES["justificatif"]["name"]);
+            $target_file = $target_dir . $fileName;
+            // $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            // var_dump($target_dir, $target_file, $imageFileType); die();
+            move_uploaded_file($_FILES["justificatif"]["tmp_name"], $target_file);
         }
 
         $noFeesLineModel->add([
@@ -40,7 +35,7 @@ class NoFeesCardController extends Controller
             'libelle' => $_POST['libelle'],
             'date' => $_POST['date'],
             'montant' => $_POST['montant'],
-            'chemin_justificatif' => $fullPathName ?? NULL
+            'chemin_justificatif' => $target_file ?? NULL,
         ]);
 
         $this->redirect('/fiches-de-frais/create');

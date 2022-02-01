@@ -43,7 +43,6 @@
                                 <a
                                 href="<?= $noFeesLineCard['chemin_justificatif'] ?>"
                                 class="btn btn-secondary"
-                                target="_blank"
                                 download>
                                 Télécharger le justificatif</a>
                             <?php endif ?>
