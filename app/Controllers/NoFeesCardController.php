@@ -24,8 +24,6 @@ class NoFeesCardController extends Controller
             $target_dir = WEBROOT . "/storage/justificatifs/";
             $fileName = basename($_FILES["justificatif"]["name"]);
             $target_file = $target_dir . $fileName;
-            // $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-            // var_dump($target_dir, $target_file, $imageFileType); die();
             move_uploaded_file($_FILES["justificatif"]["tmp_name"], $target_file);
         }
 

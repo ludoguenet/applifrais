@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\View;
 use App\Helpers\Auth;
 use App\Helpers\FeesCard;
+use App\Validation;
 use Models\FeesLineCard;
 use Models\NoFeesLineCard;
 use Models\FeesCard as ModelFeesCard;
@@ -70,6 +71,15 @@ class FeesCardController extends Controller
 
         $yearAndMonth = date('Y') . date('m');
         $userID = Auth::id();
+
+        $validation = new Validation($_POST);
+
+        $validation->validate([
+            'ETP' => ['required', 'numeric'],
+            'KM' => ['required', 'numeric'],
+            'NUI' => ['required', 'numeric'],
+            'REP' => ['required', 'numeric'],
+        ]);
 
         foreach ($_POST as $idFraisForfait => $quantity) {
             $feesLineModel->updateQuantity($userID, $yearAndMonth, $idFraisForfait, $quantity);

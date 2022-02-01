@@ -1,4 +1,7 @@
-<?php include_once(PATH_VIEW . '/includes/header.php'); ?>
+<?php include_once(PATH_VIEW . '/includes/header.php') ?>
+
+    <?php include_once(PATH_VIEW . '/includes/errors.php') ?>
+
     <h1>Créer une fiche de frais (forfait)</h1>
 
     <?php if ($currentMonthFeesCard): ?>
@@ -83,4 +86,4 @@
         </form>
     </div>
 
-<?php include_once(PATH_VIEW . '/includes/footer.php'); ?>
+<?php include_once(PATH_VIEW . '/includes/footer.php') ?>

@@ -1,4 +1,4 @@
-<?php include_once(PATH_VIEW . '/includes/header.php'); ?>
+<?php include_once(PATH_VIEW . '/includes/header.php') ?>
     <h1>Mes Fiches de Frais</h1>
 
     <form action="/fiches-de-frais" method="post">
@@ -78,4 +78,4 @@
         <?php endif ?>
     <?php endif ?>
 
-<?php include_once(PATH_VIEW . '/includes/footer.php'); ?>
+<?php include_once(PATH_VIEW . '/includes/footer.php') ?>

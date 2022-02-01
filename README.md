@@ -9,5 +9,5 @@
 - [x] Développement des Contrôleurs
 - [x] Système d'authentification
 - [x] Refonte complète de la logique des frais
-- [ ] Validation des données
-- [ ] Soumettre des justificatifs
+- [x] Validation des données (à refactorer)
+- [x] Soumettre des justificatifs

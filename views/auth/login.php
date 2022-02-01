@@ -1,4 +1,4 @@
-<?php include_once(PATH_VIEW . '/includes/header.php'); ?>
+<?php include_once(PATH_VIEW . '/includes/header.php') ?>
 <h1>Se connecter</h1>
 
 <form action="/login" method="post">
@@ -16,4 +16,4 @@
   <button type="reset" class="btn btn-secondary">Réinitialiser</button>
 
 </form>
-<?php include_once(PATH_VIEW . '/includes/footer.php'); ?>
+<?php include_once(PATH_VIEW . '/includes/footer.php') ?>

@@ -4,7 +4,12 @@ namespace App;
 
 class PDFDownloader
 {
-    public function read()
+    /**
+     * Renvoie les bonnes entêtes pour lire les fichiers uploadés.
+     *
+     * @return void
+     */
+    public function read(): void
     {
         header("Content-Type: application/octet-stream");
 
@@ -19,7 +24,7 @@ class PDFDownloader
         while (!feof($fp))
         {
             echo fread($fp, 65536);
-            flush(); // this is essential for large downloads
+            flush();
         } 
         fclose($fp); 
     }
